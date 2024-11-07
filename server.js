@@ -13,7 +13,7 @@ const DOMAIN = 'http://localhost:1337'
 app.use(express.static('public'))
 
 //routes
-app.post('create-checkout-session/:product', async (req, res) => {
+app.post('/create-checkout-session/:product', async (req, res) => {
     const { product } = req.params
     let mode, price_ID, line_items
 
@@ -31,7 +31,7 @@ app.post('create-checkout-session/:product', async (req, res) => {
         line_items = [
             {
                 price: price_ID,
-                qualtity: 1
+                quantity: 1
             }
         ]
     } else {
@@ -39,7 +39,7 @@ app.post('create-checkout-session/:product', async (req, res) => {
     }
 
     const newAPIKey = generateApiKey()
-    const customer = await stripe.constomers.create({
+    const customer = await stripe.customers.create({
         metadata: {
             APIkey: newAPIKey,
         }
