@@ -1,5 +1,6 @@
 const express = require('express')
 const { generateApiKey } = require('generate-api-key')
+const { db } = require('./firebase')
 const app = express()
 const PORT = 1337
 require('dotenv').config()
@@ -13,6 +14,24 @@ const DOMAIN = 'http://localhost:1337'
 app.use(express.static('public'))
 
 //routes
+app.get('/api', (req, res) => {
+    //receive API key
+    const { api_key } = req.query
+    if (!api_key) { return res.sendStatus(403) }
+    res.status(200).send({"message": "You are an amazing person!"})
+}),
+
+app.get('/check_status', async (req, res) => {
+    const {api_key} = req.query
+    const doc = await db.collection('api_keys').doc(api_key).get()
+    if (!doc.exists) { 
+        return res.sendStatus(500) 
+    } else { 
+        const {status} = doc.data()
+        res.status(200).send({'status': status })
+    }
+}),
+
 app.post('/create-checkout-session/:product', async (req, res) => {
     const { product } = req.params
     let mode, price_ID, line_items
@@ -59,9 +78,17 @@ app.post('/create-checkout-session/:product', async (req, res) => {
     })
 
     //create firebase record
+    const data = {
+        APIkey: newAPIKey,
+        payment_type: product,
+        stripeCustomerId,
+        status: null,
+    }
+
+    const dbRes = await db.collection('api_keys').doc(newAPIKey).set(data, { merge: true })
 
     //use webhook to access the firebase entry for that api key and ensure that billing infor is updated accordingly
     res.redirect(303, session.url)
-})
+}),
 
 app.listen(PORT, () => console.log(`Server has started on port: ${PORT}`))
