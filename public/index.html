@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,9 +23,9 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Fira Code', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(to right, #000428, #000046);
+            background: linear-gradient(to right, #476E55, #7e9988);
             color: white;
             display: flex;
             flex-direction: column;
@@ -52,7 +53,7 @@
         .addKey {
             color: white;
             text-decoration: none;
-            background: hsla(200, 80%, 50%, 0.4);
+            background: #4A5E66;
             border-radius: 4px;
             padding: 8px 16px;
             gap: 8px;
@@ -60,6 +61,7 @@
             align-items: center;
             font-size: 0.8rem;
             border: none;
+            transition-duration: 100ms;
         }
 
         .updateBtn,
@@ -72,7 +74,7 @@
         .headerContainer a:hover,
         .updateBtn:hover,
         .addKey:hover {
-            background: hsla(220, 80%, 50%, 0.8);
+            background: #5c757f;
         }
 
         .first {
@@ -96,7 +98,7 @@
         }
 
         .info h3 {
-            color: cyan;
+            color: #a3edbe;
             font-weight: 500;
         }
 
@@ -125,7 +127,7 @@
         }
 
         .authenticatedMsg {
-            color: lime;
+            color: rgb(131, 240, 131);
             display: none;
         }
 
@@ -140,11 +142,14 @@
             gap: 8px;
             width: 100%;
             margin-top: 8px;
-            border: 1px solid navy;
+            border: 2px solid #4A5E66;
+            border-radius: 5px;
+            transition-duration: 100ms;
+            
         }
 
         .keyInput:focus-within {
-            border-color: blue;
+            border-color:  #334046;
         }
 
         .keyInput input {
@@ -196,7 +201,7 @@
         .activePlan,
         .activePlan2 {
             border-radius: 20px;
-            background: lime;
+            background: #4ecad8;
             padding: 4px 10px;
             display: flex;
             align-items: center;
@@ -204,7 +209,7 @@
         }
 
         .activePlan2 {
-            background: cyan;
+            background: #8EDCAB;
             ;
         }
 
@@ -226,11 +231,11 @@
         }
 
         .currPlan {
-            color: lime;
+            color: #4ecad8;
         }
 
         .currPlan2 {
-            color: cyan;
+            color: #8EDCAB;
         }
 
         .subscriptionDetails {
@@ -255,8 +260,8 @@
         }
 
         .detailBlock i {
-            color: #32dc32;
-            background: #0f172a;
+            color: #8EDCAB;
+            background: #1a202e;
             padding: 2px 4px;
         }
 
