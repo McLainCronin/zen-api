@@ -14,12 +14,11 @@ const DOMAIN = 'http://localhost:1337'
 app.use(express.static('public'))
 
 function generateSafeApiKey(length = 16) {
-    return crypto.randomBytes(length).toString('base64url') // Generates a URL-safe Base64 string
+    return crypto.randomBytes(length).toString('base64url')
 }
 
 //routes
 app.get('/api', async (req, res) => {
-    //receive API key
     const { api_key } = req.query
     if (!api_key) { return res.sendStatus(403) }
     let paid_status, type
@@ -158,11 +157,11 @@ app.post('/create-checkout-session/:product', async (req, res) => {
         APIkey: newAPIKey,
         payment_type: product,
         stripeCustomerId,
-        status: quantity_type //subscription or 8
+        status: quantity_type
     }
     const dbRes = await db.collection('api_keys').doc(newAPIKey).set(data, { merge: true })
 
-    //use webhook to access the firebase entry for that api key and ensure that billing info is updated accordingly
+    //use webhook to access the firebase entry for that api key and ensure that billing info is updated
     res.redirect(303, session.url)
 })
 
